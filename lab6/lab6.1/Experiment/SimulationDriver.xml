@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Root>
+  <Driver>
+    <DriverName>ExperimentSimulate</DriverName>
+    <DriverVersion>1.0</DriverVersion>
+    <DriverDescription>RTU432、LightSensor、YF60实验传感器模拟驱动</DriverDescription>
+    <ServerPort>8888</ServerPort>
+    <InstrumentCollection>
+      <Instrument>
+        <InstrumentNo>99</InstrumentNo>
+        <Model>RTU432</Model>
+        <GetDataType>0</GetDataType>
+      </Instrument>
+      <Instrument>
+        <InstrumentNo>98</InstrumentNo>
+        <Model>LightSensor</Model>
+        <GetDataType>0</GetDataType>
+      </Instrument>
+      <Instrument>
+        <InstrumentNo>97</InstrumentNo>
+        <Model>YF60</Model>
+        <GetDataType>0</GetDataType>
+      </Instrument>
+    </InstrumentCollection>
+  </Driver>
+</Root>

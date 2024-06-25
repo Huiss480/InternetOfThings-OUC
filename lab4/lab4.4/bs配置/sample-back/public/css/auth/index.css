@@ -1,0 +1,160 @@
+html,
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0 !important;
+    /* overflow: scroll; */
+
+}
+
+#app {
+    height: 100%;
+}
+
+#appname {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 13px;
+    line-height: 60px;
+    width: calc(15% - 70px);
+}
+
+#Collapsebtn {
+    margin-top: 6px;
+    background-color: #475666;
+    color: rgb(255, 253, 253);
+    border: 0;
+    padding: 0;
+}
+
+.header-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.el-header {
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+}
+
+.el-footer {
+    background-color: #B3C0D1;
+    color: #333;
+
+}
+
+.el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    height: 100%;
+}
+
+.el-main {
+    background-color: #E9EEF3;
+    color: #333;
+
+}
+
+#app>.el-container {
+    height: calc(100%);
+    /* 500px; */
+    /* calc(100%); */
+    /* calc(100vh - 60px) !important; */
+    overflow: scroll;
+}
+
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    margin-right: 0 !important;
+    width: 100%;
+    min-height: 400px;
+}
+
+.el-tree-node__label {
+    font-size: medium !important;
+}
+
+.el-tree-node__content {
+    margin: 5px;
+}
+
+#navigation {
+    width: 100%;
+    height: 100%;
+    padding-top: 10px;
+    margin-left: 20px;
+    margin: 0 !important;
+    background-color: white;
+}
+
+#navigationContentRight {
+    width: 100%;
+    height: 101.3%;
+    background-color: white;
+    /* text-align: center; */
+}
+
+.el-col-1 {
+    width: 2% !important;
+}
+
+.navigationContent {
+    height: 90%;
+    width: 100%;
+    /* display: flex;
+    flex-direction: row; */
+
+}
+
+.navigationContentLeft {
+    height: 100%;
+    /* background-color: white; */
+    /* width: 20%; */
+}
+
+.navigationContentRight {
+    /* width: 50%; */
+
+    height: 100%;
+}
+
+#getLocaMap {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: "微软雅黑";
+}
+
+.choseLoca {
+    /* padding-left: 30px;
+    padding-top: 20px;
+    margin-top: 20px; */
+    padding-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 52vw;
+}
+
+.table {
+    padding: 20px 10px 0px 30px;
+}
+
+.el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+    background-color: rgb(195, 225, 245) !important;
+}
+
+/* .choseLoca:before {
+    border-top: solid 1px gray;
+    content: '';
+    position: absolute;
+    left: 23%;
+    top: 0;
+    bottom: auto;
+    right: auto;
+    height: 1px;
+    width: 50%;
+} */

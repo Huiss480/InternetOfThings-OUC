@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实时监控</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/auth/scene.css" />
+    <link rel="stylesheet" href="/js/dep/elementui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/js/dep/layui/css/layui.css">
+    <style>
+        body {
+            background: url("../img/wrapper-bg.png") no-repeat;
+            background-size: 100% 100%;
+        }
+
+        #primary_app {
+            display: flex;
+            flex-direction: row;
+            min-width: 100%;
+            min-height: 890px;
+            overflow-y: scroll;
+            margin-top: 15px;
+        }
+
+        #left {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            margin-left: 1%;
+        }
+
+        #middle {
+            display: flex;
+            flex-direction: column;
+            width: 36.5%;
+            margin-left: 0.5%;
+        }
+
+        #right {
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+            margin-left: 0.5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: flex;flex-direction: column;" id="app">
+        <div style="width: 100%;height: 40px;">
+            <h2 class="header-title">{{sysInfo.SoftwareName}}</h2>
+        <div id="primary_app">
+
+            <div id="left">
+                <div style="height: 45%;width: 100%;">
+                    <div class="xpanel xpanel-l-t">
+                        <!-- 左上视频 -->
+                        <div class="title">{{htmlText.lt.title}}</div>
+                        <div class="video-content">
+                            <video id='_video' controls muted autoplay style=" width:100%; height:100%; object-fit:
+                fill"> </video>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 55%;width: 100%;margin: 2% 0 2% 0;">
+                    <div class="xpanel xpanel-l-b">
+                        <!-- 左下传感器 -->
+                        <div class="title">{{htmlText.rm.title}}</div>
+                        <div class="params">
+                            <template v-for="item in sensorDataList">
+                                <div class="param">
+                                    <div><img :src="item.img" class="icon"></div>
+                                    <div class="unit">
+                                        {{item.value!=null?item.value.toFixed(item.dot):item.value}}<span>{{item.unit}}</span>
+                                    </div>
+                                    <div class="unit-name">{{item.name}}</div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div id="middle">
+                <div style="height: 70%;width: 100%;">
+                    <div class="xpanel xpanel-c-b">
+                        <!-- 中上曲线 -->
+                        <div class="title">{{htmlText.lb.title}}</div>
+                        <el-tabs v-model="activeName" @tab-click="handleClick" :stretch="false"
+                            style="width: 100%;height: 90%;margin-top: 20px;">
+                            <template v-for="(item,index) in sensorDataList">
+                                <el-tab-pane :label="item.name" :name="item.prop" style="height: 55vh;" :lazy="false">
+                                    <div :id="item.prop" class="echarts" :ref="item.prop"></div>
+                                </el-tab-pane>
+                            </template>
+
+                            <el-tab-pane style="display: none;" :disabled="true" :lazy="true">
+                                <!-- 最后一个必须是单标签 不知道为啥 -->
+                                <!-- <div id="" class="echarts" ref="" /> -->
+                                <div id="" class="echarts" ref="" ></div>
+                            </el-tab-pane>
+
+
+
+                        </el-tabs>
+
+
+                    </div>
+                </div>
+                <div style="height: 27%;width: 100%;margin: 2% 0 2% 0;">
+                    <div class="xpanel xpanel-c-b">
+                        <!-- 中下控制 -->
+                        <div class="title title-long">{{htmlText.m.title}}</div>
+                        <div class="params">
+                            <div class="param" v-show="currentShow.IsTestNow" @click="changeTestUnitStatus">
+                                <div><i class="el-icon-video-pause"
+                                        style="width: 50px;height: 50px; font-size: 50px;color: rgb(199, 92, 30);"></i>
+                                </div>
+                                <div class="unit">-</div>
+                                <div class="unit-name">停止监测</div>
+                            </div>
+                            <div class="param" v-show="!currentShow.IsTestNow" @click="changeTestUnitStatus">
+                                <div><i class="el-icon-video-play"
+                                        style="width: 50px;height: 50px; font-size: 50px;color: rgb(124, 219, 29);"></i>
+                                </div>
+                                <div class="unit">-</div>
+                                <div class="unit-name">开始监测</div>
+                            </div>
+                            <div class="param" v-if="videoList.length>0" @click="videoInit">
+                                <div><i class="el-icon-refresh-right"
+                                        style="width: 50px;height: 50px; font-size: 50px;color: rgb(29, 111, 219);"></i>
+                                </div>
+                                <div class="unit">-</div>
+                                <div class="unit-name">视频刷新</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="right">
+                <div style="height: 20%;width: 100%;">
+                    <div class="xpanel xpanel-r-t">
+                        <!-- 右上当前 -->
+                        <div class="title" id="current">{{htmlText.rt.title}}</div>
+                        <div v-if="currentShow!=null" class="current-show">
+                            <el-row>
+                                名称：<span>{{currentShow.title}}</span>
+                            </el-row>
+                            <el-row>
+                                状态：<span>{{currentShow.IsTestNow?'监测中':'监测停止'}}</span>
+                            </el-row>
+                        </div>
+                    </div>
+                </div>
+                <div style="min-height: 79%;width: 100%;margin: 2% 0 2% 0;overflow-y: scroll;">
+                    <div class="xpanel xpanel-r-b">
+                        <!-- 右下记录 -->
+                        <div class="title">{{htmlText.rb.title}}</div>
+                        <div class="operateList">
+                            <div class="operateitem" v-for="text in sysMonitorRecords">
+                                {{text}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- dep -->
+<script src="/js/dep/vue/vue.js"></script>
+<script src="/js/dep/elementui/lib/index.js"></script>
+<script src="/js/dep/echarts/echarts.js"></script>
+<script src="/js/dep/layui/layui.js"></script>
+<script src="/js/dep/axios/axios.min.js"></script>
+<script src="/js/dep/flv/dist/flv.js"></script>
+<script src="/js/dep/mqtt/mqtt.min.js"></script>
+<!-- auth -->
+<!-- 加密 -->
+<script src="/js/auth/utils/mycrypto.js"></script>
+<!-- 接口 -->
+<script src="/js/auth/utils/apis.js"></script>
+<!-- 授权 -->
+<script src="/js/auth/utils/auth.js"></script>
+<!-- 请求 -->
+<script src="/js/auth/utils/request.js"></script>
+<script src="/js/auth/function/mqtt.js"></script>
+<!-- 方法 -->
+<script src="/js/auth/function/public.js"></script>
+<!-- 组件 -->
+<script src="/js/auth/component/videoControl.js"></script>
+<script src="/js/auth/function/unitToimg.js"></script>
+<script src="/js/dep/baidumap/InfoBox.js"></script>
+<script src="/js/auth/video/VideoIns.js"></script>
+<script src="/js/auth/data/scene.js"></script>
+
+
+<script>
+    window.onhashchange = function (e) {
+        if (window.location.hash == '' || window.lastHash == window.location.hash) {
+            console.log('hash没变')
+        } else {
+            console.log('hash变化')
+            window.hrefParams = app.getHashParams();
+            if (window.hrefParams.navId == app.hrefParams.navId) { //导航不变
+                if (!window.hrefParams.testunitId) { //无监测单元
+                    console.log('无监测单元')
+                    //仅退出操作
+                    app.sensorDataList = [];
+                    app.sensorControlList = [];
+                    app.sensorControlUnitListIndex = {};
+                    app.sensorControlListIndex = {};
+                    app.charts = {};
+                    clearInterval(app.testUnitLoop);
+                    app.testUnitLoop = null;
+                    try {
+                        app.videoIns.stopVideo();
+                        //取消当前订阅
+                        app.mqttIns.unsubscribe(app.mqttIns.messageIdToTopic[app.mqttIns.messageIdProvider.nextId -
+                                1],
+                            function (err) {
+                                if (!err) {
+                                    console.log('取消订阅成功');
+                                }
+                            })
+                    } catch (e) {
+
+                    }
+                    //app.videoIns.stopVideo();
+                } else { //监测单元变化
+                    app.addSysMonitorRecord('切换监测单元...');
+                    app.sensorDataList = [];
+                    app.sensorControlList = [];
+                    app.sensorControlUnitListIndex = {};
+                    app.sensorControlListIndex = {};
+                    app.charts = {};
+                    clearInterval(app.testUnitLoop);
+                    app.testUnitLoop = null;
+                    try {
+                        app.videoIns.stopVideo();
+                        //取消当前订阅
+                        app.mqttIns.unsubscribe(app.mqttIns.messageIdToTopic[app.mqttIns.messageIdProvider.nextId -
+                                1],
+                            function (err) {
+                                if (!err) {
+                                    console.log('取消订阅成功');
+                                }
+                            })
+                    } catch (e) {
+
+                    }
+                    app.testUnitInit();
+                }
+
+                //导航不变，监测单元改变
+                //更新app.hrefParams
+                app.hrefParams = window.hrefParams;
+                //作一些退出操作，传感器参数重置，视频关闭，曲线销毁重置
+                console.log('退出操作')
+            } else {
+                //导航节点号变化直接reload
+                window.location.reload();
+            }
+        }
+    }
+</script>
+<script>
+    // layui弹出层组件
+    let layer = null;
+    layui.use('layer', function () {
+        layer = layui.layer;
+    });
+</script>
+<script>
+    window.onresize = () => {
+        //自适应曲线
+        document.querySelectorAll(".echarts").forEach((e) => {
+            //console.log(app.charts[e.id])
+            app.charts[e.id].resize()
+            //e.id
+        })
+        //实例化的echarts对象调用resize方法
+    };
+</script>
+<script>
+    window.onerror = function (errorMsg, url, lineNumber) {
+        console.log(errorMsg, lineNumber)
+
+        if (lineNumber === 3357 && errorMsg ===
+            'Uncaught TypeError: Cannot read properties of null (reading \'flushStashedSamples\')') {
+            stopCamera();
+            layer.open({
+                title: '注意！',
+                content: '视频流不可用！',
+                btn: ['确认'],
+                yes: function (index) {
+                    stopCamera();
+                    layer.close(index);
+                },
+                cancel: function (index) {
+                    stopCamera();
+                    layer.close(index);
+                }
+            })
+            return true;
+        }
+        if (lineNumber === 2 && errorMsg ===
+            'Uncaught TypeError: Cannot read properties of undefined (reading \'reload\')') {
+            console.log('group error')
+            return true;
+        }
+
+    };
+    window.addEventListener('unhandledrejection', function (event) {
+        if (event.reason.message == 'The play() request was interrupted by a call to pause().') {
+            console.log('异常中断');
+            try {
+                stopCamera();
+            } catch (e) {}
+            event.preventDefault();
+        }
+    });
+</script>
+
+</html>

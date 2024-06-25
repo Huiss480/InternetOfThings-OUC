@@ -1,0 +1,243 @@
+#_map {
+    overflow: hidden;
+    width: 100%;
+    height: 90%;
+    margin-top: 5% !important;
+    /* margin-left: 1% !important; */
+    margin: 0;
+    font-family: "微软雅黑";
+  }
+  
+  .BMap_cpyCtrl {
+    display: none;
+  }
+  
+  .anchorBL {
+    display: none;
+  }
+  
+  .video-content {
+    /* 视频 */
+    width: 95%;
+    height: 80%;
+    margin-left: 2.5%;
+    margin-top: 2%;
+  }
+  
+  .infoBox > img {
+    /* 信息框关闭图标 */
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    margin: 10px 10px 10px 10px;
+    width: 15px !important;
+    height: 15px !important;
+  }
+  
+  .info-box-title {
+    /* 信息框标题 */
+    margin: 15px 0px 10px 15px;
+    color: #00d3ff !important;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  
+  .info-location {
+    /* 信息框位置 */
+    color: #fff;
+    padding-left: 5px;
+    padding-right: 15px;
+    margin-top: 10px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    padding-left: 10px;
+  }
+  
+  .info-time {
+    /* 信息框时间 */
+    color: hsla(0, 0%, 100%, 0.6);
+    padding-left: 10px;
+    font-size: 13px;
+    padding-bottom: 20px;
+  }
+  
+  .params {
+    /* 所有参数 */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: 30px;
+    margin-top: 15px;
+  }
+  
+  .param {
+    /* 参数整体 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 20px 20px 20px;
+    width: 65px;
+  }
+  
+  .unit {
+    /* 参数单位 */
+    height: 17px;
+    margin-top: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgb(114, 114, 114);
+  }
+  
+  .unit-name {
+    /* 单位名 */
+  
+    margin-top: 5px;
+    color: #000000;
+    font-size: 13px;
+  }
+  
+  .current-show {
+    /* 当前观测 */
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    color: black;
+    font-size: 15px;
+  }
+  
+  .el-row {
+    margin: 10px;
+    color: rgb(0, 0, 0);
+    /* font-weight: bold; */
+  }
+  
+  .xpanel .echarts {
+    /* echarts必须设置大小 */
+    margin-top: 30px;
+    margin-left: 25px;
+    height: 80%;
+    width: 90%;
+  }
+  
+  .xpanel #charts {
+    margin-top: 30px;
+    margin-left: 25px;
+    height: 80%;
+    width: 90%;
+  }
+  
+  .el-tabs__item {
+    color: rgb(0, 0, 0) !important;
+    font-size: 15px !important;
+    /* font-weight: bold !important; */
+  }
+  
+  .el-tabs__header {
+    margin: 0 10px 0 10px !important;
+  }
+  .el-tabs__nav-prev,
+  .el-tabs__nav-next {
+    font-size: 20px !important;
+    color: black !important;
+  }
+  
+  /* @keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+  
+  @-webkit-keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+  
+  @keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+  }
+  
+  @-webkit-keyframes blink-caret {
+    50% {
+      border-color: transparent;
+    }
+  } */
+  
+  .operateitem {
+    font: bold Consolas, Monaco, monospace;
+    /* border-right: .1em solid black; */
+    /* width: 16.5em;
+    width: 21ch; */
+    margin: 1em 1em;
+    white-space: normal;
+    overflow: hidden;
+    /* animation: typing 3s steps(21, end), blink-caret .5s step-end infinite alternate; */
+    /* -webkit-animation: typing 3s steps(21, end), blink-caret .5s step-end infinite alternate; */
+  }
+  
+  .all-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+  }
+  
+  .icon-left-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 50%;
+    height: 100%;
+    font-size: 30px;
+  }
+  
+  .icon-right-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 50%;
+  
+    font-size: 30px;
+  }
+  
+  .my-icon {
+    cursor: pointer;
+    margin: 3%;
+    box-sizing: border-box;
+  }
+  
+  .my-icon:hover {
+    color: #3490fa;
+    filter: brightness(120%);
+    font-size: 31px;
+  }
+  
+  .top {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+  }
+  
+  .bottom {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+  }
+  .el-popover {
+    bottom: 25vh;
+    left: 36vw;
+  }
+  

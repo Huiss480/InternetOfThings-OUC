@@ -1,0 +1,10 @@
+{
+    "ignore": [
+        "logger/logs/*",
+        "data_source/agri_data/*",
+        "data_source/keep_data/*",
+        "data_source/temp_data/*",
+        "public/*",
+        "python_env/*"
+    ]
+}

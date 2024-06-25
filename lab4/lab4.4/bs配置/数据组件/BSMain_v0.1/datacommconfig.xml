@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<config>
+  <controltype>0</controltype>
+  <restip>192.168.2.3</restip><!--115.28.236.114-->
+  <restport>8888/ComConfig</restport>
+  <encrypt>0</encrypt>
+  <datacapacity>2000</datacapacity>
+  <projectcode>zclianwu_application</projectcode>
+  <encrypted>false</encrypted>
+  <publickey>MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBALwNJfeJur3shtFmi2A2ZDsi9rb8UhKv5Mt6RcfS5YCd06UVCFCtj8QzkGLwnFglHOrYjGglLNFPHw4kUYNPzUMCAwEAAQ==</publickey>
+  <abilitycontrol>
+    <monitoring>true</monitoring>
+    <storage>true</storage>
+    <cmdcontrol>true</cmdcontrol>
+  </abilitycontrol>
+  <IoTGates>
+    <IoTGate>
+      <IoTGateID>1</IoTGateID>
+      <MqttInfo>
+        <!-- MQTT服务IP地址或域名 -->
+        <Broker>192.168.2.3</Broker>
+        <!-- MQTT服务TCP连接端口 -->
+        <TCP>1883</TCP>
+        <!-- MQTT服务WebSocket连接端口 -->
+        <Websocket>8083</Websocket>
+        <!-- MQTT服务连接用户名 -->
+        <username>appback</username>
+        <!-- MQTT服务连接密码 -->
+        <password>ouccs</password>
+        <!-- 发送MQTT消息等级 -->
+        <qos>2</qos>
+      </MqttInfo>
+    </IoTGate>
+
+  </IoTGates>
+ <!-- <MqttInfo>
+    &lt;!&ndash;<Broker>broker-cn.emqx.io</Broker>&ndash;&gt;
+    <Broker>10.168.1.143</Broker>
+    <TCP>1883</TCP>
+    <WebSocket>8083</WebSocket>
+    <username>appback</username>
+    <password>ouccs</password>
+    <qos>2</qos>
+  </MqttInfo>
+  <BackupMqttInfo>
+    <Broker>127.0.0.1</Broker>
+    <TCP>1883</TCP>
+    <WebSocket>8083</WebSocket>
+    <username>appback</username>
+    <password>ouccs</password>
+    <qos>2</qos>
+  </BackupMqttInfo>-->
+  <database>
+    <ip>192.168.2.3</ip>
+    <servicename>appdb2</servicename>
+    <username>root</username>
+    <password>123456</password>
+  </database>
+  <bakdb>
+    <ip>192.168.2.3</ip>
+    <servicename>hdbl</servicename>
+    <username>root</username>
+    <password>
+    </password>
+  </bakdb>
+  <auth>
+    <ip>192.168.2.3</ip>
+    <servicename>hdbl</servicename>
+    <username>root</username>
+    <password>
+    </password>
+  </auth>
+  <bakauth>
+    <ip>192.168.2.3</ip>
+    <servicename>orcl</servicename>
+    <username>WVhWMGFBPT0=</username>
+    <password>YjNWalkzTT0=</password>
+  </bakauth>
+  <ControlDASS>0</ControlDASS>
+</config>

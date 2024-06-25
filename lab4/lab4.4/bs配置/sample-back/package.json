@@ -1,0 +1,47 @@
+{
+  "name": "sample-back",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node bin/www",
+    "dev": ".\\node_modules\\.bin\\nodemon bin\\www",
+    "prd": "pm2 start bin/www -i max",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "paddleClas": "cd /d ./python_env/py_code/PaddleClas/deploy && \"../../../python-3.8.10-embed-amd64/python.exe\"  python/predict_cls.py -c configs/inference_cls.yaml"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "co": "^4.6.0",
+    "compressing": "^1.6.2",
+    "debug": "^4.1.1",
+    "ejs": "~2.3.3",
+    "fs-extra": "^10.1.0",
+    "ioredis": "^5.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.7.0",
+    "koa-body": "^5.0.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-jwt": "^4.0.3",
+    "koa-logger": "^3.2.0",
+    "koa-onerror": "^4.1.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.2.0",
+    "koa2-cors": "^2.0.6",
+    "log4js": "^6.5.2",
+    "moment": "^2.29.3",
+    "mqtt": "^4.3.7",
+    "nedb": "^1.8.0",
+    "node-cron": "^3.0.2",
+    "ws": "^8.8.1",
+    "x2js": "^3.4.3",
+    "yaml": "^2.1.1"
+  },
+  "devDependencies": {
+    "koa2-swagger-ui": "^5.5.1",
+    "nodemon": "^1.19.1",
+    "swagger-jsdoc": "^6.2.1"
+  }
+}

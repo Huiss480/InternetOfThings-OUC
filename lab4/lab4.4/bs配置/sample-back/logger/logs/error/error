@@ -1,0 +1,9 @@
+[2024-05-15T20:23:28.255] [ERROR] error - TypeError: Cannot read property '0' of undefined
+    at D:\bs配置\sample-back\routes\comconfig.js:210:23
+    at runMicrotasks (<anonymous>)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at async D:\bs配置\sample-back\app.js:152:3
+    at async serve (D:\bs配置\sample-back\node_modules\koa-static\index.js:53:9)
+    at async logger (D:\bs配置\sample-back\node_modules\koa-logger\index.js:67:7)
+    at async bodyParser (D:\bs配置\sample-back\node_modules\koa-bodyparser\index.js:95:5)
+    at async cors (D:\bs配置\sample-back\node_modules\koa2-cors\dist\index.js:91:9)
